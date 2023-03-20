@@ -17,7 +17,12 @@ const languageFiltersData = [
 ]
 
 class GithubPopularRepos extends Component {
-  state = {neededList: [], isLoading: false, fetchingFailed: false}
+  state = {
+    neededList: [],
+    isLoading: false,
+    fetchingFailed: false,
+    ActiveTabId: languageFiltersData[0].id,
+  }
 
   componentDidMount() {
     this.setState({isLoading: true})
@@ -25,8 +30,9 @@ class GithubPopularRepos extends Component {
   }
 
   fetchingData = async () => {
+    const {ActiveTabId} = this.state
     try {
-      const apiUrl = `https://apis.ccbp.in/popular-repos`
+      const apiUrl = `https://apis.ccbp.in/popular-repos?language=${ActiveTabId}`
       const response = await fetch(apiUrl)
       const data = await response.json()
       this.fetchingDone(data.popular_repos)
@@ -52,14 +58,26 @@ class GithubPopularRepos extends Component {
     console.log(error)
   }
 
+  changeTabIdOnClick = uniqueId => {
+    this.setState(
+      {ActiveTabId: uniqueId, isLoading: true, neededList: []},
+      this.fetchingData,
+    )
+  }
+
   render() {
-    const {neededList, isLoading, fetchingFailed} = this.state
+    const {neededList, isLoading, fetchingFailed, ActiveTabId} = this.state
     return (
       <div className="main-bg">
         <h1 className="main-heading">Popular</h1>
         <ul className="ul-list-menu-items">
           {languageFiltersData.map(eachData => (
-            <LanguageFilterItem key={eachData.id} itemDetails={eachData} />
+            <LanguageFilterItem
+              key={eachData.id}
+              itemDetails={eachData}
+              isActiveTab={eachData.id === ActiveTabId}
+              changeTabIdOnClick={this.changeTabIdOnClick}
+            />
           ))}
         </ul>
 

@@ -2,6 +2,9 @@
   padding: 0px;
   margin: 0px;
 }
+button {
+  cursor: pointer;
+}
 .main-bg {
   display: flex;
   flex-direction: column;
@@ -36,12 +39,16 @@
 .repo-list {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  width: 80%;
-  list-style-type: none;
-  padding: 0px;
+  list-style: none;
   flex-wrap: wrap;
+  margin: 25px 0px 35px 0px;
+}
+@media all and (min-width: 768px) {
+  .repo-list {
+    max-width: 60%;
+  }
 }
 .fetch-error-complete-container {
   text-align: center;

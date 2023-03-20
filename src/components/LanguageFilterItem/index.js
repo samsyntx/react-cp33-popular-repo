@@ -2,18 +2,20 @@
 import './index.css'
 
 const LanguageFilterItem = props => {
-  const {itemDetails, clickAction, activeId} = props
+  const {itemDetails, isActiveTab, changeTabIdOnClick} = props
   const {id, language} = itemDetails
-  const classAdd = id === activeId ? 'color-item' : ''
-  const clickEvent = () => {
-    clickAction(id)
+  const classAdd = isActiveTab ? 'color-item' : ''
+
+  const changeStateSelectedLang = () => {
+    changeTabIdOnClick(id)
   }
+
   return (
     <li className="list-item">
       <button
+        onClick={changeStateSelectedLang}
         type="button"
         className={`list-button ${classAdd}`}
-        onClick={clickEvent}
       >
         {language}
       </button>
