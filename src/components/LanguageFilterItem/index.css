@@ -1,0 +1,21 @@
+.list-item {
+  color: #0f172a;
+}
+
+.list-button {
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.color-item {
+  border-style: solid;
+  border-color: #0284c7;
+  border-width: 1px;
+  border-radius: 15px;
+  color: #0284c7;
+  padding-left: 15px;
+  padding-right: 15px;
+}
